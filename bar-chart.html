@@ -27,20 +27,24 @@
 
     <script>
      var dyn = d3.select("#dynamic");
-     var info = [23, 22, 17, 12, 6, 4, 16];
-     var inof = [26, 24, 14, 13, 5, 4, 14];
+     var info = [{'name':'Human Service','percent':23}, {'name':'Social Security','percent':22}, {'name':'Dept. Defense','percent':17}, {'name':'Treasury','percent':12}, {'name':'Other departments','percent':6}, {'name':'agriculture','percent':4}, {'name':'other','percent':16}];
+     var info = [{'name':'Human Service','percent':26}, {'name':'Social Security','percent':24}, {'name':'Dept. Defense','percent':14}, {'name':'Treasury','percent':13}, {'name':'Other departments','percent':5}, {'name':'agriculture','percent':4}, {'name':'other','percent':15}];
 
      var makeBars = function(stuff) {
        
        dyn.selectAll("div")
 	  .data(stuff)
 	  .enter()
-	  .append("div")
+	  .append("p")
+	    .text( function(d) {
+	    return d["name"];
+	})
+	.append("div")
 	  .style("width", function(d) {
-	    return d + "px";
+	    return d['percent'] + "px";
 	  })
 	  .text( function(d) {
-	    return d + "%";
+	    return d['percent'] + "%";
 	  });
      };
 
@@ -50,10 +54,10 @@
 	  .transition()
 	  .duration(2000)
 	  .style("width", function(d) {
-	    return d * scale + "px";
+	    return d['percent'] * scale + "px";
 	  })
           .text( function(d) {
-	    return d + "%";
+	    return d['percent'] + "%";
 	  });
      };
 
