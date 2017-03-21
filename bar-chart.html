@@ -23,18 +23,24 @@
 
   <body>
 
-    <h2>2012</h2>
+    <h2>b</h2>
+    <h3>Total Budget: c </h3>
     <div class="chart" id="dynamic">
     </div>
 
     <script>
      var dyn = d3.select("#dynamic");
      var info = [23, 22, 17, 12, 6, 4, 16];
+     var inof = [26, 24, 14, 13, 5, 4, 14];
+     tot = "$2.34 trillion";
+     tit = "$2.99 trillion";
+     j = "2012";
+     k = "2016";
 
-     var makeBars = function() {
+     var makeBars = function(stuff) {
        
        dyn.selectAll("div")
-	  .data(info)
+	  .data(stuff)
 	  .enter()
 	  .append("div")
 	  .style("width", function(d) {
@@ -54,9 +60,21 @@
 	    return d * scale + "px";
 	  });
      };
-     makeBars();
-     transitionTest(30);
+     var load = function(){
+         makeBars(info);
+         transitionTest(30);
+     }
+     var loda = function(){
+         makeBars(inof);
+         transitionTest(30);
+     }
+     window.onload=function(){
+           document.getElementById("abc").addEventListener("click", load);
+           document.getElementById("cba").addEventListener("click", loda);
+     };
+     
     </script>
-
+    <button id="abc"> 2012 </button>
+    <button id="cba"> 2016 </button>
   </body>
 </html>
